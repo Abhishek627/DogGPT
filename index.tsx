@@ -39,7 +39,6 @@ function parseError(error: string) {
 }
 
 async function generate(message: string) {
-  console.error('User input:', message);
   userInput.disabled = true;
 
   // Store the message for later use in PDF
@@ -85,10 +84,10 @@ async function generate(message: string) {
                 img = document.createElement('img');
                 img.src = `data:image/png;base64,` + data.data;
               } else {
-                console.error('no data', chunk);
+                console.log('no data', chunk);
               }
             } catch (e) {
-              console.error('no data', chunk);
+              console.log('no data', chunk);
             }
           }
           if (text && img) {
@@ -139,6 +138,17 @@ examples.forEach((li) =>
   }),
 );
 
+// Add event listener for enter button
+const enterButton = document.getElementById('enterButton');
+if (enterButton) {
+  enterButton.addEventListener('click', async () => {
+    const message = userInput.value;
+    if (message.trim()) {
+      await generate(message);
+    }
+  });
+}
+
 // Add event listener for download button
 const downloadButton = document.getElementById('downloadButton');
 if (downloadButton) {
@@ -147,7 +157,6 @@ if (downloadButton) {
     
     // Get the original message from the button's data attribute
     const originalMessage = downloadButton.getAttribute('data-original-message') || 'dog_response';
-    console.error('Downloading PDF for message:', originalMessage);
     const fileName = originalMessage.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     
     const pdf = new jsPDF();
@@ -207,4 +216,3 @@ if (downloadButton) {
     pdf.save(`${fileName}.pdf`);
   });
 }
-

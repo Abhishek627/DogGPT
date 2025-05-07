@@ -110,13 +110,19 @@ h1 {
   border-left: 4px solid light-dark(#1c7ed6, #66b2ff);
 }
 
+.input-container {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
 textarea#input {
-  width: 100%;
+  flex: 1;
   padding: 15px 20px;
   border: 1px solid light-dark(#ced4da, #495057);
   border-radius: 6px;
   font-family: 'Space Mono', monospace;
-  margin-top: 8px;
   min-height: 90px;
   resize: vertical;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -124,10 +130,42 @@ textarea#input {
   color: light-dark(#343a40, #f8f9fa);
 }
 
-textarea#input:focus {
-  outline: none;
-  border-color: light-dark(#1c7ed6, #66b2ff);
-  box-shadow: 0 0 0 2px light-dark(rgba(28, 126, 214, 0.2), rgba(102, 178, 255, 0.2));
+.enter-button {
+  background-color: light-dark(#1c7ed6, #66b2ff);
+  color: white;
+  border: none;
+  padding: 0 25px;
+  border-radius: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  min-height: 90px;
+  align-self: stretch;
+}
+
+.enter-button:hover {
+  background-color: light-dark(#1971c2, #3399ff);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+}
+
+.enter-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .input-container {
+    flex-direction: column;
+  }
+  
+  .enter-button {
+    width: 100%;
+    margin-top: 10px;
+    min-height: 44px;
+  }
 }
 
 #output + p {
