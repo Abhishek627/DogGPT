@@ -39,7 +39,7 @@ function parseError(error: string) {
 }
 
 async function generate(message: string) {
-  console.log('User input:', message);
+  console.error('User input:', message);
   userInput.disabled = true;
 
   // Store the message for later use in PDF
@@ -85,10 +85,10 @@ async function generate(message: string) {
                 img = document.createElement('img');
                 img.src = `data:image/png;base64,` + data.data;
               } else {
-                console.log('no data', chunk);
+                console.error('no data', chunk);
               }
             } catch (e) {
-              console.log('no data', chunk);
+              console.error('no data', chunk);
             }
           }
           if (text && img) {
@@ -147,7 +147,7 @@ if (downloadButton) {
     
     // Get the original message from the button's data attribute
     const originalMessage = downloadButton.getAttribute('data-original-message') || 'dog_response';
-    console.log('Downloading PDF for message:', originalMessage);
+    console.error('Downloading PDF for message:', originalMessage);
     const fileName = originalMessage.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     
     const pdf = new jsPDF();
