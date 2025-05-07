@@ -39,6 +39,7 @@ function parseError(error: string) {
 }
 
 async function generate(message: string) {
+  console.log('User input:', message);
   userInput.disabled = true;
 
   // Store the message for later use in PDF
@@ -146,6 +147,7 @@ if (downloadButton) {
     
     // Get the original message from the button's data attribute
     const originalMessage = downloadButton.getAttribute('data-original-message') || 'dog_response';
+    console.log('Downloading PDF for message:', originalMessage);
     const fileName = originalMessage.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     
     const pdf = new jsPDF();
