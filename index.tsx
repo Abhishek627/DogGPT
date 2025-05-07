@@ -4,14 +4,6 @@ import {jsPDF} from 'jspdf';
 
 const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
 
-const chat = ai.chats.create({
-  model: 'gemini-2.0-flash-exp',
-  config: {
-    responseModalities: ['TEXT', 'IMAGE'],
-  },
-  history: [],
-});
-
 const userInput = document.querySelector('#input') as HTMLTextAreaElement;
 const modelOutput = document.querySelector('#output') as HTMLDivElement;
 const slideshow = document.querySelector('#slideshow') as HTMLDivElement;
@@ -138,7 +130,7 @@ userInput.addEventListener('keydown', async (e: KeyboardEvent) => {
 
 const examples = document.querySelectorAll('#examples li');
 examples.forEach((li) =>
-  li.addEventListener('click', async (e) => {
+  li.addEventListener('click', async () => {
     const text = li.textContent;
     if (text) {
       await generate(text);
@@ -150,7 +142,6 @@ examples.forEach((li) =>
 const downloadButton = document.getElementById('downloadButton');
 if (downloadButton) {
   downloadButton.addEventListener('click', async () => {
-    const modelOutput = document.querySelector('#output') as HTMLDivElement;
     const slides = document.querySelectorAll('.slide');
     
     // Get the original message from the button's data attribute
@@ -214,3 +205,4 @@ if (downloadButton) {
     pdf.save(`${fileName}.pdf`);
   });
 }
+
